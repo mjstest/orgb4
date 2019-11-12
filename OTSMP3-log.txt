@@ -1,0 +1,35 @@
+OTS MP3 Conversion Utility - Copyright 1996-2003 Ots Corporation
+
+Log opened Friday 4 October 2019 at 12:04:00 PM.
+
+ACTION: Convert OTS file(s) to MP3 file(s)
+PATHS:-
+   Source: F:\JINGO\Ots\
+   Destination: F:\JINGO\MP3\
+OPTIONS:-
+   If destination file exists: Skip
+   Recurse folders: No
+   Delete source: Yes
+
+12:04:01 - Commenced operation.
+12:04:01 - Analysing selected items...
+12:04:01 - Found 7 OTS files.
+12:04:01 - Converting files...
+12:04:01 - SKIPPING: F:\JINGO\MP3\Bad Guy - Billie Eilish.mp3
+12:04:01 -    Reason: Item does not contain an MP3-style audio data chunk!
+12:04:01 - SKIPPING: F:\JINGO\MP3\All This Time - Drax Project.mp3
+12:04:01 -    Reason: Item does not contain an MP3-style audio data chunk!
+12:04:01 - SKIPPING: F:\JINGO\MP3\Truth Hurts [Explicit] - Lizzo.mp3
+12:04:01 -    Reason: Item does not contain an MP3-style audio data chunk!
+12:04:01 - SKIPPING: F:\JINGO\MP3\Senorita - Shawn Mendes & Camila Cabello.mp3
+12:04:01 -    Reason: Item does not contain an MP3-style audio data chunk!
+12:04:01 - SKIPPING: F:\JINGO\MP3\Thank U, Next [Explicit] - Ariana Grande.mp3
+12:04:01 -    Reason: Item does not contain an MP3-style audio data chunk!
+12:04:01 - SKIPPING: F:\JINGO\MP3\Sunflower Spider-Man - Post Malone & Swae Lee.mp3
+12:04:01 -    Reason: Item does not contain an MP3-style audio data chunk!
+
+12:04:01 - Operation terminated normally.
+
+SUMMARY: 1 of 7 source files fully converted, 1 MP3 file created.
+
+Log closed Friday 4 October 2019 at 12:04:01 PM.
