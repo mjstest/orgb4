@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+##
+## This script runs student code against the provided unit test as 
+## an argument.  Example:  ./run_tests test09.cpp
+##
+## The script then returns
+##   0 => all tests passed
+##   1 => at least one test failed
+##   2 => tests crashed
+##   3 => tests failed to compile
+##   4 => script failed (e.g. missing arg)
+##   5 => all tests passed BUT valgrind found ptr error / memory leak
+##
+## Note that if the code failed to compile, compiler output is 
+## available on stdout and stderr.  Otherwise it's hidden.
+##
+
+## here's the unit test to run the student code against, which is 
+## provided as an argument to the script:
+UNIT="${1}"
+
+if [[ ! -e "${UNIT}" ]]; then
+  echo "script arg missing or file doesn't exist"
+  exit 4
+fi
+
+## clean
+rm -f test.exe
+
+## build:
+if ! g++ -g -std=c++11 main.cpp util.cpp "${UNIT}" -o test.exe; then
+  ##echo "failed to compile"
+  exit 3
+else
+  ##echo "compiled"
+  
+  ## run
+  rm -f output 
+  
+  if ! ./test.exe >& output; then
+    ## at least one test failed OR it crashed
+    ## if it crashed, the output file will be empty OR it will contain SIGSEGV violation signal
+    if [[ -s output ]]; then  
+      ##
+      ## size is > 0, so it might have run, but we need to search for SIGSEGV
+      ##
+      ## cat output
+      ##
+      if ! grep -m 1 "SIGSEGV" output &> /dev/null; then
+        ## does not contain, so ran but at least one failed:
+        ##echo "at least one test failed"
+        echo "** Test Output **"
+        cat output
+        exit 1
+      else
+        ##echo "unit test crashed"
+        echo "** Test Output **"
+        cat output
+        exit 2
+      fi
+    else
+      ##echo "unit test crashed"
+      echo "** Test Output **"
+      cat output
+      exit 2
+    fi
+  else
+    ##echo "unit test passed"
+    
+    
+#
+# 5. okay, now run valgrind and make sure all memory was freed:
+#
+rm -f valgrind_output
+
+valgrind --tool=memcheck --leak-check=yes ./test.exe >& valgrind_output
+
+if ! grep "All heap blocks were freed" valgrind_output > /dev/null; then
+  ##echo "leak..."
+  echo "** valgrind output **"
+  cat valgrind_output
+  exit 5
+else
+  ##echo "all memory returned!"
+  rm -f valgrind_output
+fi
+
+
+    exit 0
+  fi
+fi
