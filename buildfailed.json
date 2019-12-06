@@ -1,0 +1,15 @@
+{ 
+  "leaderboard": [
+        {
+            "name": "Score",
+            "value": 0
+        },
+        {
+            "name": "Stars",
+            "value": ""
+        }
+    ],
+  "score": 0.0, 
+  "output": "Build failed, one or more compilation errors.  See output.",
+  "stdout_visibility": "visible"
+}
