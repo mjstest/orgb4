@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+#
+# Grading script for CS 251 project 07, which is running a single
+# C++ file against a large set of unit tests. Basically we just 
+# copy over the student's .h file and run our grading program,
+# which is written in C++. The grading program runs each test
+# separately, which is slow but produces a detailed report.
+# Resulting json file is then copied into results directory.
+#
+# Cheatsheet on writing bash scripts: https://devhints.io/bash
+#
+
+#
+# 0. copy over "error" json results file in case something goes
+#    terribly wrong:
+#
+cp  error.json  /autograder/results/results.json
+
+#
+# 1. copy over the student's .h file:
+#
+cp  /autograder/submission/*.h .
+cp  /autograder/submission/*.hpp . >& /dev/null
+
+if [[ -e minqueue.h ]]; then
+  ## okay
+  rm -f test.exe >& /dev/null
+else
+  ## no files or wrong format for filename?
+  rm -f /autograder/results/results.json
+  cp format.json /autograder/results/results.json
+  exit 0
+fi
+
+#
+# 2. has student exceeded # of submissions?
+#
+rm -f output >& /dev/null
+rm -f output_sub >& /dev/null
+
+./numsubmissions.exe >& output_sub
+
+let submissions=$?
+
+if [ $submissions -ge 6 ]; then
+  ##echo "too many submissions"
+  rm -f /autograder/results/results.json
+  cp toomanysubmissions.json /autograder/results/results.json
+  echo "** Number of Submissions Exceeded **"
+  cat output_sub
+  exit 0
+fi
+
+#
+# 3. make sure it compiles
+#
+rm -f test.exe >& /dev/null
+
+## build:
+if ! g++ -g -std=c++11 main.cpp util.cpp test05.cpp -o test.exe; then
+  ##echo "failed to compile"
+  rm -f /autograder/results/results.json
+  cp buildfailed.json /autograder/results/results.json
+  exit 0
+fi
+
+
+echo "** Number of Submissions **"
+cat output_sub
+echo "You are allowed a total of 6 submissions with score > 0."
+echo " "
+
+
+#
+# 4. run the grading program
+#
+rm -f test.exe >& /dev/null
+
+./grader.exe
+
+#
+# 5. move results into proper directory
+#
+if [[ -e results.json ]]; then
+  rm -f /autograder/results/results.json
+  cp results.json /autograder/results/results.json
+fi
+
+#
+# 6. success
+#
+exit 0
