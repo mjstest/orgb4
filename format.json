@@ -1,0 +1,15 @@
+{ 
+  "leaderboard": [
+        {
+            "name": "Score",
+            "value": 0
+        },
+        {
+            "name": "Stars",
+            "value": ""
+        }
+    ],
+  "score": 0.0, 
+  "output": "Expecting the file 'minqueue.h', either no .h file was submitted or filename was not 'minqueue.h'.",
+  "stdout_visibility": "hidden"
+}
