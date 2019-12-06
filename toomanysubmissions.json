@@ -1,0 +1,15 @@
+{ 
+  "leaderboard": [
+        {
+            "name": "Score",
+            "value": 0
+        },
+        {
+            "name": "Stars",
+            "value": ""
+        }
+    ],
+  "score": 0.0, 
+  "output": "You have exceeded the # of submissions, submission not accepted.",
+  "stdout_visibility": "hidden"
+}
