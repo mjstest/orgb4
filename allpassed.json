@@ -1,0 +1,15 @@
+{ 
+  "leaderboard": [
+        {
+            "name": "Score",
+            "value": 100
+        },
+        {
+            "name": "Stars",
+            "value": "*****"
+        }
+    ],
+  "score": 100.0, 
+  "output": "Well done, all tests passed!",
+  "stdout_visibility": "hidden"
+}
