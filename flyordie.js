@@ -462,7 +462,7 @@ game['objectsDef'] = {
             }
         },
         animation: 'flying_right',
-        skill: game['skills']['beginnersLuck']
+        skill: game['skills']['fireball']
     },
     pumpkinCharacter: {
         name: 'pumpkinCharacter',
